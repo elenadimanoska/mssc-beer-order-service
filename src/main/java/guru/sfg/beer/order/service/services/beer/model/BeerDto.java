@@ -65,4 +65,4 @@ public class BeerDto implements Serializable {
     @JsonDeserialize(using = LocalDateDeserializer.class)
     private LocalDate myLocalDate;
 
-}`
+}
