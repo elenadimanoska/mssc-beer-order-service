@@ -20,6 +20,8 @@ import java.util.UUID;
 public class BeerServiceRestTemplateImpl implements BeerService {
 
     public final String BEER_PATH = "/api/v1/beer/upc/{upc}";
+    // keep a simple path constant for tests and other consumers that expect the plain upc path
+    public static final String BEER_UPC_PATH_V1 = "/api/v1/beer/upc/";
     private final RestTemplate restTemplate;
 
     @Setter
@@ -45,7 +47,7 @@ public class BeerServiceRestTemplateImpl implements BeerService {
 
         ResponseEntity<BeerDto> responseEntity = restTemplate
                 .exchange(beerServiceHost + BEER_PATH, HttpMethod.GET, null,
-                       BeerDto.class, upc);
+                        BeerDto.class, upc);
 
         return Optional.ofNullable(responseEntity.getBody());
     }
