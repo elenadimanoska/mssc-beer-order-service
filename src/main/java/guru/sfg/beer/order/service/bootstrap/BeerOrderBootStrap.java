@@ -29,13 +29,13 @@ public class BeerOrderBootStrap implements CommandLineRunner {
     }
 
     private void loadCustomerData() {
-        if (customerRepository.count() == 0) {
-            customerRepository.save(Customer.builder()
+        if (customerRepository.findAllByCustomerNameLike(BeerOrderBootStrap.TASTING_ROOM).isEmpty()) {
+            Customer savedCustomer = customerRepository.saveAndFlush(Customer.builder()
                     .customerName(TASTING_ROOM)
                     .apiKey(UUID.randomUUID())
                     .build());
+
+            log.debug("Tasting Room Customer Id: {}", savedCustomer.getId().toString());
         }
-        customerRepository.findAll().forEach(c-> {
-            log.info("Tasting Room Customer Id: {}", c.getId());});
     }
 }
